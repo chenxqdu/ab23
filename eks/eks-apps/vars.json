@@ -9,15 +9,17 @@
             "port": 8888,
             "target_port": 8888,
             "replicas_number":1,
-            "service_type": "ClusterIP" 
+            "service_type": "ClusterIP",
+            "cpu_limit": "500m"
         },
         "registry": {
             "type": "stateful_set",
             "image_url": "sqshq/piggymetrics-registry",
             "port": 8761,
             "target_port": 8761,
-            "replicas_number":1,
-            "service_type": "ClusterIP"  
+            "replicas_number":2,
+            "service_type": "ClusterIP",
+            "cpu_limit": "500m" 
         },
         "gateway": {
             "type": "deployment",
@@ -25,7 +27,8 @@
             "port": 80,
             "target_port": 4000,
             "replicas_number":2,
-            "service_type": "LoadBalancer" 
+            "service_type": "LoadBalancer",
+            "cpu_limit": "500m" 
         },
         "rabbitmq":{
             "type": "stateful_set",
@@ -33,7 +36,8 @@
             "port": 5672,
             "target_port": 5672,
             "replicas_number":1,
-            "service_type": "ClusterIP" 
+            "service_type": "ClusterIP" ,
+            "cpu_limit": "500m" 
         },
         "mongodb":{
             "type": "stateful_set",
@@ -41,7 +45,8 @@
             "port": 27017,
             "target_port": 27017,
             "replicas_number":1,
-            "service_type": "ClusterIP" 
+            "service_type": "ClusterIP",
+            "cpu_limit": "500m" 
         },
         "auth-service": {
             "type": "deployment",
@@ -49,14 +54,17 @@
             "port": 5000,
             "target_port": 5000,
             "replicas_number":1,
-            "service_type": "ClusterIP" 
+            "service_type": "ClusterIP",
+            "cpu_limit": "2000m" 
         },
         "account-service": {
+            "type": "deployment",
             "image_url": "sqshq/piggymetrics-account-service",
             "port": 6000,
             "target_port": 6000,
             "replicas_number":1,
-            "service_type": "ClusterIP" 
+            "service_type": "ClusterIP",
+            "cpu_limit": "2000m" 
         },
         "statistics-service": {
             "type": "deployment",
@@ -64,7 +72,8 @@
             "port": 7000,
             "target_port": 7000,
             "replicas_number":1,
-            "service_type": "ClusterIP" 
+            "service_type": "ClusterIP",
+            "cpu_limit": "2000m"  
         },
         "notification-service": {
             "type": "deployment",
@@ -72,7 +81,8 @@
             "port": 8000,
             "target_port": 8000,
             "replicas_number":1,
-            "service_type": "ClusterIP" 
+            "service_type": "ClusterIP",
+            "cpu_limit": "2000m"  
         },
         "monitoring-service": {
             "type": "deployment",
@@ -80,7 +90,8 @@
             "port": 9000,
             "target_port": 8080,
             "replicas_number":1,
-            "service_type": "LoadBalancer" 
+            "service_type": "LoadBalancer",
+            "cpu_limit": "2000m"  
         }
     }
 }

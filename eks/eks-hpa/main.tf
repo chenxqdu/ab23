@@ -16,7 +16,7 @@ resource "kubernetes_horizontal_pod_autoscaler" "piggymetrics" {
     
     scale_target_ref {
       api_version = "apps/v1"
-      kind = "Deployment"
+      kind = each.value.type == "stateful_set" ? "StatefulSet" : "Deployment"
       name = each.key
     }
   }

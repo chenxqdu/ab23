@@ -56,8 +56,7 @@ resource "kubernetes_stateful_set" "piggymetrics" {
           }
           resources {
             limits = {
-              cpu = "20m"
-              memory = "300Mi"
+              cpu = each.value.cpu_limit
             }
           }
         }  
@@ -110,8 +109,7 @@ resource "kubernetes_deployment" "piggymetrics" {
           }
           resources {
             limits = {
-              cpu = "20m"
-              memory = "300Mi"
+              cpu = each.value.cpu_limit
             }
           }
         }  

@@ -25,11 +25,12 @@ variable "microservices" {
     port = number,
     target_port = number,
     replicas_number = number,
-    service_type = string
+    service_type = string,
+    cpu_limit = string
   }))
 }
 
 variable "registry_server" {
   type = string
-  default = "registry-0.registry.piggymetrics.svc.cluster.local"
+  default = "registry"
 }
