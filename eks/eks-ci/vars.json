@@ -1,0 +1,6 @@
+{   
+    "aws_region": "ap-northeast-1",
+    "cluster_name": "eks-ab23",
+    "ecr_repo": "config",
+    "git_url": "https://github.com/chenxqdu/ab23.git"
+}
