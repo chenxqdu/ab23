@@ -1,0 +1,8 @@
+{   
+    "aws_region": "ap-northeast-1",
+    "cluster_name": "eks-ab23",
+    "node_group_max" : 5,
+    "node_group_min" : 2,
+    "node_group_desire" : 2,
+    "instance_type": ["t3.xlarge"]
+}
