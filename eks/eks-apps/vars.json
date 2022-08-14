@@ -5,7 +5,7 @@
     "microservices": {
         "config": {
             "type": "stateful_set",
-            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-config-0804",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-config-0813",
             "port": 8888,
             "target_port": 8888,
             "replicas_number":1,
@@ -23,7 +23,7 @@
         },
         "gateway": {
             "type": "deployment",
-            "image_url": "sqshq/piggymetrics-gateway",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-gateway-0813",
             "port": 80,
             "target_port": 4000,
             "replicas_number":2,
@@ -50,7 +50,7 @@
         },
         "auth-service": {
             "type": "deployment",
-            "image_url": "sqshq/piggymetrics-auth-service",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-auth-0813",
             "port": 5000,
             "target_port": 5000,
             "replicas_number":1,
@@ -59,7 +59,7 @@
         },
         "account-service": {
             "type": "deployment",
-            "image_url": "sqshq/piggymetrics-account-service",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-account-0813",
             "port": 6000,
             "target_port": 6000,
             "replicas_number":1,

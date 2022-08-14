@@ -48,8 +48,15 @@ terraform apply --vars-file=vars.json --auto-approve
 
 ```
 kubectl get --raw "/apis/metrics.k8s.io/v1beta1/pods"
-kubectl get hpa -n piggymetrics
 kubectl top pod -n piggymetrics
+kubectl get hpa -n piggymetrics -w
+
+```
+
+```
+kubectl run -i --tty load-generator --image=busybox /bin/sh
+while true; do wget -q -O - http://$gateway_clusterip/accounts/demo; done
+kubectl delete pod load-generator
 ```
 
 # spring cloud config image ci
@@ -57,6 +64,22 @@ kubectl top pod -n piggymetrics
 cd eks-cli
 terraform init
 terraform apply --vars-file=vars.json --auto-approve
+```
+
+# aws distro opentelemetry 
+```
+cd eks-adot-operator
+terraform init
+terraform apply --vars-file=vars.json --auto-approve
+```
+```
+cd eks-adot-collector
+terraform init
+terraform apply --vars-file=vars.json --auto-approve
+```
+```
+kubectl get deploy -n observability
+kubectl get deploy -n opentelemetry-operator-system
 ```
 
 ## note

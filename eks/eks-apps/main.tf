@@ -106,7 +106,7 @@ resource "kubernetes_deployment" "piggymetrics" {
           }
           env {
             name = "OTEL_EXPORTER_OTLP_ENDPOINT"
-            value = "http://my-collector-xray-collector.collector:4317"
+            value = "http://my-collector-xray-collector.observability:4317"
           }
           dynamic "env" {
             for_each = var.env_vars
