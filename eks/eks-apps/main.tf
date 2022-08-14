@@ -44,7 +44,7 @@ resource "kubernetes_stateful_set" "piggymetrics" {
             container_port = each.value.port 
           }
           env {
-            name = "EUREKA_SERVER"
+            name = "eureka_defaultzone"
             value = var.registry_server
           }
           dynamic "env" {
@@ -97,8 +97,16 @@ resource "kubernetes_deployment" "piggymetrics" {
             container_port = each.value.port 
           }
           env {
-            name = "EUREKA_SERVER"
+            name = "eureka_defaultzone"
             value = var.registry_server
+          }
+          env {
+            name = "OTEL_RESOURCE_ATTRIBUTES"
+            value = "service.name=${each.key}"
+          }
+          env {
+            name = "OTEL_EXPORTER_OTLP_ENDPOINT"
+            value = "http://my-collector-xray-collector.collector:4317"
           }
           dynamic "env" {
             for_each = var.env_vars
@@ -112,7 +120,7 @@ resource "kubernetes_deployment" "piggymetrics" {
               cpu = each.value.cpu_limit
             }
           }
-        }  
+        } 
       }
     }
   }

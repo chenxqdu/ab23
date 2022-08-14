@@ -1,7 +1,7 @@
 {   
     "aws_region": "ap-northeast-1",
     "cluster_name": "eks-ab23",
-    "registry_server": "registry",
+    "registry_server": "http://registry-0.registry.piggymetrics:8761/eureka, http://registry-1.registry.piggymetrics:8761/eureka",
     "microservices": {
         "config": {
             "type": "stateful_set",

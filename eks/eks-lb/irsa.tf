@@ -3,10 +3,12 @@ data "tls_certificate" "default" {
   url = data.aws_eks_cluster.default.identity.0.oidc.0.issuer
 }
 
-resource "aws_iam_openid_connect_provider" "default" {
-  client_id_list = ["sts.amazonaws.com"]
-  thumbprint_list = [data.tls_certificate.default.certificates.0.sha1_fingerprint]
-  url = data.aws_eks_cluster.default.identity.0.oidc.0.issuer
+data "terraform_remote_state" "cluster" {
+  backend = "local"
+
+  config = {
+    path = "../eks-cluster/terraform.tfstate"
+  }
 }
 
 data "aws_iam_policy_document" "k8s-acc-AWSLoadBalancerRoleTrustPolicy" {
@@ -16,18 +18,18 @@ data "aws_iam_policy_document" "k8s-acc-AWSLoadBalancerRoleTrustPolicy" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.default.url, "https://", "")}:aud" 
+      variable = "${replace(data.aws_eks_cluster.default.identity.0.oidc.0.issuer, "https://", "")}:aud" 
       values   = ["sts.amazonaws.com"]
     }
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.default.url, "https://", "")}:sub" # todo
+      variable = "${replace(data.aws_eks_cluster.default.identity.0.oidc.0.issuer, "https://", "")}:sub"
       values   = ["system:serviceaccount:kube-system:aws-load-balancer-controller"]
     }
 
     principals {
-      identifiers = [aws_iam_openid_connect_provider.default.arn] # todo
+      identifiers = [data.terraform_remote_state.cluster.outputs.oidc_provider_arn]
       type        = "Federated"
     }
   }

@@ -40,3 +40,17 @@ resource "aws_eks_node_group" "k8s-acc" {
     aws_iam_role_policy_attachment.k8s-acc-AmazonEC2ContainerRegistryReadOnly,
   ]
 }
+
+resource "local_file" "kubeconfig" {
+  depends_on = [
+    aws_eks_cluster.k8s-acc,
+    aws_eks_node_group.k8s-acc,
+  ]
+
+  sensitive_content = templatefile("${path.module}/kubeconfig.tpl", {
+    cluster_name = var.cluster_name,
+    clusterca    = aws_eks_cluster.k8s-acc.certificate_authority[0].data,
+    endpoint     = aws_eks_cluster.k8s-acc.endpoint,
+    })
+  filename          = "./kubeconfig-${var.cluster_name}"
+}

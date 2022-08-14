@@ -25,15 +25,6 @@ provider "helm" {
   }
 }
 
-resource "local_file" "kubeconfig" {
-  sensitive_content = templatefile("${path.module}/kubeconfig.tpl", {
-    cluster_name = var.cluster_name,
-    clusterca    = data.aws_eks_cluster.default.certificate_authority[0].data,
-    endpoint     = data.aws_eks_cluster.default.endpoint,
-    })
-  filename          = "./kubeconfig-${var.cluster_name}"
-}
-
 resource "kubernetes_service_account" "aws-load-balancer-controller" {
   metadata {
     name = "aws-load-balancer-controller"

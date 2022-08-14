@@ -3,6 +3,6 @@
     "cluster_name": "eks-ab23",
     "node_group_max" : 5,
     "node_group_min" : 2,
-    "node_group_desire" : 4,
+    "node_group_desire" : 3,
     "instance_type": ["m5.4xlarge"]
 }
