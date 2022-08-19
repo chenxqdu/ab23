@@ -1,18 +1,24 @@
+server:
+  port: 8761
+
 spring:
   application:
     name: registry
-  cloud:
-    config:
-      uri: http://config:8888
-      fail-fast: true
-      password: ${CONFIG_SERVICE_PASSWORD}
-      username: user
+  # cloud:
+  #   config:
+  #     uri: http://config:8888
+  #     fail-fast: true
+  #     password: ${CONFIG_SERVICE_PASSWORD}
+  #     username: user
 
 eureka:
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: false
+    hostname: "${HOSTNAME}.registry"
   client:
-    registerWithEureka: false
+    registerWithEureka: true
     fetchRegistry: false
-    server:
-      waitTimeInMsWhenSyncEmpty: 0
+    serviceUrl:
+      defaultZone: ${eureka_defaultzone}
+  server:
+    enable-self-preservation: false

@@ -1,11 +1,11 @@
 {   
     "aws_region": "ap-northeast-1",
     "cluster_name": "eks-ab23",
-    "registry_server": "http://registry-0.registry.piggymetrics:8761/eureka, http://registry-1.registry.piggymetrics:8761/eureka",
+    "registry_server": "http://registry-0.registry:8761/eureka,http://registry-1.registry:8761/eureka",
     "microservices": {
         "config": {
             "type": "stateful_set",
-            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-config-0813",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-config-0819",
             "port": 8888,
             "target_port": 8888,
             "replicas_number":1,
@@ -14,7 +14,7 @@
         },
         "registry": {
             "type": "stateful_set",
-            "image_url": "sqshq/piggymetrics-registry",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-registry-0819",
             "port": 8761,
             "target_port": 8761,
             "replicas_number":2,

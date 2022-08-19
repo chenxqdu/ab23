@@ -40,6 +40,7 @@ resource "kubernetes_stateful_set" "piggymetrics" {
         container{
           image = each.value.image_url
           name = each.key
+          image_pull_policy = "Always"
           port {
             container_port = each.value.port 
           }
@@ -93,6 +94,7 @@ resource "kubernetes_deployment" "piggymetrics" {
         container{
           image = each.value.image_url
           name = each.key
+          image_pull_policy = "Always"
           port {
             container_port = each.value.port 
           }
