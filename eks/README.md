@@ -78,8 +78,8 @@ terraform init
 terraform apply --vars-file=vars.json --auto-approve
 ```
 ```
-kubectl get deploy -n observability
-kubectl get deploy -n opentelemetry-operator-system
+kubectl get all -n observability
+kubectl get all -n opentelemetry-operator-system
 ```
 
 ## note

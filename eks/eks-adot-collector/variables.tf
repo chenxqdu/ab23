@@ -5,3 +5,7 @@ variable "aws_region" {
 variable "cluster_name" {
   type = string
 }
+
+variable "amp_endpoint" {
+  type = string
+}

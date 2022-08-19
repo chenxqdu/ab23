@@ -1,4 +1,5 @@
 {   
     "aws_region": "ap-northeast-1",
-    "cluster_name": "eks-ab23"
+    "cluster_name": "eks-ab23",
+    "amp_endpoint": "https://aps-workspaces.ap-northeast-1.amazonaws.com/workspaces/ws-9b6916a5-df5d-4381-bc41-62d2bc1df5ac/api/v1/remote_write"
 }

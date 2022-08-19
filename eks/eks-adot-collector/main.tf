@@ -32,7 +32,47 @@ resource "kubernetes_service_account" "adot-collector" {
   }  
 }
 
-resource "kubernetes_manifest" "adot-collector-xray" {
+resource "kubernetes_cluster_role" "otel-prometheus-role" {
+  metadata {
+    name = "otel-prometheus-role"
+  }
+
+  rule {
+    api_groups = [""]
+    resources  = ["nodes", "pods","services","endpoints","nodes/proxy"]
+    verbs      = ["get", "list", "watch"]
+  }
+
+  rule {
+    api_groups = ["extensions"]
+    resources  = ["ingresses"]
+    verbs      = ["get", "list", "watch"]
+  }
+
+  rule {
+    non_resource_urls = ["/metrics"]
+    verbs      = ["get"]
+  }
+
+}
+
+resource "kubernetes_cluster_role_binding" "otel-prometheus-role-binding" {
+  metadata {
+    name = "otel-prometheus-role-binding"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "otel-prometheus-role"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "adot-collector"
+    namespace = "observability"
+  }
+}
+
+resource "kubernetes_manifest" "adot-collector" {
   depends_on = [
     kubernetes_service_account.adot-collector,
   ]
@@ -41,32 +81,11 @@ resource "kubernetes_manifest" "adot-collector-xray" {
     apiVersion = "opentelemetry.io/v1alpha1"
     kind = "OpenTelemetryCollector"
     metadata = {
-      name = "my-collector-xray"
+      name = "my-collector"
       namespace = "observability"
     }
     spec = {
-      config = <<-EOT
-      receivers:
-        otlp:
-          protocols:
-            grpc:
-              endpoint: 0.0.0.0:4317
-            http:
-              endpoint: 0.0.0.0:4318
-      processors:
-      
-      exporters:
-        awsxray:
-          region: ${var.aws_region}
-      
-      service:
-        pipelines:
-          traces:
-            receivers: [otlp]
-            processors: []
-            exporters: [awsxray]
-      
-      EOT
+      config = "${file("collector-config.yaml")}"
       mode = "deployment"
       serviceAccount = "adot-collector"
     }
