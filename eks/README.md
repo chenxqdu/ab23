@@ -55,7 +55,7 @@ kubectl get hpa -n piggymetrics -w
 
 ```
 kubectl run -i --tty load-generator --image=busybox /bin/sh
-while true; do wget -q -O - http://$gateway_clusterip/accounts/demo; done
+while true; do wget -q -O - http://${gateway_clusterip}/accounts/demo; done
 kubectl delete pod load-generator
 ```
 

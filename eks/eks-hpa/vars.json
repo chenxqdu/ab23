@@ -8,11 +8,11 @@
         },
         "registry": {
             "type": "stateful_set",
-            "replicas_number":1
+            "replicas_number":2
         },
         "gateway": {
             "type": "deployment",
-            "replicas_number":1
+            "replicas_number":2
         },
         "rabbitmq":{
             "type": "stateful_set",

@@ -200,9 +200,9 @@ processors:
 
 exporters:
   awsxray:
-      region: ${var.aws_region}
-  # awsemf:
-  #   region: ${var.aws_region}
+    region: ${var.aws_region}
+  awsemf:
+    region: ${var.aws_region}
   awsprometheusremotewrite:
     endpoint: "https://aps-workspaces.ap-northeast-1.amazonaws.com/workspaces/ws-9b6916a5-df5d-4381-bc41-62d2bc1df5ac/api/v1/remote_write"
     # endpoint: ${var.amp_endpoint}
@@ -220,8 +220,8 @@ service:
         receivers: [prometheus]
         processors: [batch/metrics]
         exporters: [awsprometheusremotewrite]
-      # metrics:
-      #   receivers: [otlp]
-      #   processors: [batch/metrics]
-      #   exporters: [awsemf]
+      metrics/otlp:
+        receivers: [otlp]
+        processors: [batch/metrics]
+        exporters: [awsemf]
        

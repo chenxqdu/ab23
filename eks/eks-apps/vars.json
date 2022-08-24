@@ -64,25 +64,25 @@
             "target_port": 6000,
             "replicas_number":1,
             "service_type": "ClusterIP",
-            "cpu_limit": "2000m" 
+            "cpu_limit": "500m" 
         },
         "statistics-service": {
             "type": "deployment",
-            "image_url": "sqshq/piggymetrics-statistics-service",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-statistics-0818",
             "port": 7000,
             "target_port": 7000,
             "replicas_number":1,
             "service_type": "ClusterIP",
-            "cpu_limit": "2000m"  
+            "cpu_limit": "500m"  
         },
         "notification-service": {
             "type": "deployment",
-            "image_url": "sqshq/piggymetrics-notification-service",
+            "image_url": "public.ecr.aws/i4x4j7g8/chenxqdu-tokyo-pb:piggymetrics-notification-0818",
             "port": 8000,
             "target_port": 8000,
             "replicas_number":1,
             "service_type": "ClusterIP",
-            "cpu_limit": "2000m"  
+            "cpu_limit": "500m"  
         },
         "monitoring-service": {
             "type": "deployment",
@@ -91,7 +91,7 @@
             "target_port": 8080,
             "replicas_number":1,
             "service_type": "LoadBalancer",
-            "cpu_limit": "2000m"  
+            "cpu_limit": "500m"  
         }
     }
 }
