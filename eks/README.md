@@ -3,7 +3,7 @@
 ```
 cd eks-cluster
 terraform init
-terraform apply --vars-file=vars.json --auto-approve
+terraform apply --var-file=vars.json --auto-approve
 ```
 
 ```
@@ -16,19 +16,30 @@ kubectl get pods -A -o wide
 ```
 cd eks-lb
 terraform init
-terraform apply --vars-file=vars.json --auto-approve
+terraform apply --var-file=vars.json --auto-approve
 ```
 
 ```
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
 
+# eks karpenter
+```
+cd eks-karpenter
+terraform init
+terraform apply --var-file=vars.json --auto-approve
+```
+
+```
+kubectl logs -f -n karpenter -l app.kubernetes.io/name=karpenter -c controller
+``` 
+
 # spring cloud microservices deployment
 
 ```
 cd eks-apps
 terraform init
-terraform apply --vars-file=vars.json --auto-approve
+terraform apply --var-file=vars.json --auto-approve
 ```
 
 ```
@@ -43,7 +54,7 @@ kubectl get sts -n piggymetrics
 ```
 cd eks-hpa
 terraform init
-terraform apply --vars-file=vars.json --auto-approve
+terraform apply --var-file=vars.json --auto-approve
 ```
 
 ```
@@ -55,6 +66,7 @@ kubectl get hpa -n piggymetrics -w
 
 ```
 kubectl run -i --tty load-generator --image=busybox /bin/sh
+export gateway_clusterip=x.x.x.x
 while true; do wget -q -O - http://${gateway_clusterip}/accounts/demo; done
 kubectl delete pod load-generator
 ```
@@ -63,19 +75,19 @@ kubectl delete pod load-generator
 ```
 cd eks-cli
 terraform init
-terraform apply --vars-file=vars.json --auto-approve
+terraform apply --var-file=vars.json --auto-approve
 ```
 
 # aws distro opentelemetry 
 ```
 cd eks-adot-operator
 terraform init
-terraform apply --vars-file=vars.json --auto-approve
+terraform apply --var-file=vars.json --auto-approve
 ```
 ```
 cd eks-adot-collector
 terraform init
-terraform apply --vars-file=vars.json --auto-approve
+terraform apply --var-file=vars.json --auto-approve
 ```
 ```
 kubectl get all -n observability
