@@ -18,6 +18,8 @@ resource "kubectl_manifest" "karpenter_provisioner" {
       securityGroupSelector:
         kubernetes.io/cluster/${var.cluster_name}: "owned"
     ttlSecondsAfterEmpty: 30
+    consolidation:
+      enabled: true
   YAML
 
   depends_on = [

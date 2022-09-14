@@ -1,4 +1,4 @@
-# cluster creation
+# cluster creation (managed nodes + oidc)
 
 ```
 cd eks-cluster
@@ -71,14 +71,14 @@ while true; do wget -q -O - http://${gateway_clusterip}/accounts/demo; done
 kubectl delete pod load-generator
 ```
 
-# spring cloud config image ci
+# spring cloud config image ci (github+codebuild+ecr)
 ```
 cd eks-cli
 terraform init
 terraform apply --var-file=vars.json --auto-approve
 ```
 
-# aws distro opentelemetry 
+# aws distro opentelemetry (export to x-ray and prometheus)
 ```
 cd eks-adot-operator
 terraform init
