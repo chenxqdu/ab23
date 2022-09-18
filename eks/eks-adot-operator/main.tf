@@ -7,4 +7,5 @@ resource "aws_eks_addon" "adot" {
 
   cluster_name = var.cluster_name
   addon_name   = "adot"
+  addon_version = "v0.56.0-eksbuild.1"
 }

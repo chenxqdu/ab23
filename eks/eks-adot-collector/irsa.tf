@@ -53,6 +53,12 @@ resource "aws_iam_role_policy_attachment" "adot-AmazonPrometheusRemoteWriteAcces
   role       = aws_iam_role.k8s-acc-AdotCollectorRole.id
 }
 
+## to check if needed for adot addon 0.58.0 and above     
+# resource "aws_iam_role_policy_attachment" "adot-AmazonPrometheusQueryAccess" {
+#   policy_arn = "arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess"
+#   role       = aws_iam_role.k8s-acc-AdotCollectorRole.id
+# }
+
 resource "aws_iam_role_policy_attachment" "adot-AWSXrayWriteOnlyAccess" {
   policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
   role       = aws_iam_role.k8s-acc-AdotCollectorRole.id
