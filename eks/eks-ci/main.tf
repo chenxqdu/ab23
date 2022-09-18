@@ -93,5 +93,11 @@ resource "aws_codebuild_webhook" "default" {
       type    = "HEAD_REF"
       pattern = "main"
     }
+
+    filter {
+      type    = "FILE_PATH"
+      pattern = "/piggymetrics/config/*"
+    }
+
   }
 }
