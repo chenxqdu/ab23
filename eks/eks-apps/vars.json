@@ -90,7 +90,16 @@
             "port": 9000,
             "target_port": 8080,
             "replicas_number":1,
-            "service_type": "LoadBalancer",
+            "service_type": "ClusterIP",
+            "cpu_limit": "500m"  
+        },
+        "turbine-stream-service":{
+            "type": "deployment",
+            "image_url": "sqshq/piggymetrics-turbine-stream-service",
+            "port": 8989,
+            "target_port": 8989,
+            "replicas_number":1,
+            "service_type": "ClusterIP",
             "cpu_limit": "500m"  
         }
     }

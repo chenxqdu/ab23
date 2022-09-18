@@ -125,6 +125,12 @@ resource "kubernetes_deployment" "piggymetrics" {
         } 
       }
     }
+
+    strategy {
+      rolling_update {
+        max_unavailable = "50%"
+      }
+    }
   }
 }
 
